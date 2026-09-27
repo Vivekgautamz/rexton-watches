@@ -83,13 +83,13 @@ export default async function HomePage() {
         {/* Ambient Dark Luxury Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2000&q=90"
+            src="/images/hero/rexton-hero-banner.jpg"
             alt="REXTON Sovereign Chronograph"
             fill
             priority
-            className="object-cover object-center opacity-40 mix-blend-luminosity scale-105 transition-transform duration-1000 ease-out"
+            className="object-cover object-center opacity-60 scale-105 transition-transform duration-1000 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/60 to-transparent" />
           <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#0C0C0C]/60 to-[#0C0C0C]" />
         </div>
 
@@ -242,7 +242,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative h-[480px] bg-neutral-900 border border-neutral-800">
               <Image
-                src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=85"
+                src="/images/atelier/swiss-watchmaker.jpg"
                 alt="REXTON Master Horology Calibre"
                 fill
                 className="object-cover"

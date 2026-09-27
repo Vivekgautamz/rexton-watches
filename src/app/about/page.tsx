@@ -14,11 +14,11 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative h-[550px] bg-[#0C0C0C] flex items-center text-white overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2000&q=85"
+          src="/images/hero/rexton-hero-banner.jpg"
           alt="REXTON Swiss Watchmaking Atelier"
           fill
           priority
-          className="object-cover object-center opacity-30 mix-blend-luminosity"
+          className="object-cover object-center opacity-40 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/40 to-transparent" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-4">
@@ -55,7 +55,7 @@ export default function AboutPage() {
 
           <div className="relative h-80 bg-neutral-100 border border-neutral-200">
             <Image
-              src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80"
+              src="/images/atelier/swiss-watchmaker.jpg"
               alt="Swiss Watchmaker Precision"
               fill
               className="object-cover"
