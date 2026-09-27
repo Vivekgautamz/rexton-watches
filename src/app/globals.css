@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 40% 96%;
+    --secondary-foreground: 0 0% 15%;
+    --muted: 0 0% 45%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 38 42% 64%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 7%;
+    --radius: 0.25rem;
+  }
+
+  body {
+    @apply bg-white text-[#111111] antialiased selection:bg-[#C5A880] selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Swiss Horology Typography & Accents */
+.font-cinzel {
+  font-family: 'Cinzel', serif, -apple-system, BlinkMacSystemFont;
+}
+
+.luxury-gradient-dark {
+  background: linear-gradient(180deg, #181818 0%, #0A0A0A 100%);
+}
+
+.luxury-gold-text {
+  background: linear-gradient(135deg, #DFBA73 0%, #C5A880 50%, #9F7944 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxury-border-glow:hover {
+  border-color: #C5A880;
+  box-shadow: 0 10px 30px -10px rgba(197, 168, 128, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C5A880;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A88B63;
+}
