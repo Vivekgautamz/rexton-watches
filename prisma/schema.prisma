@@ -1,11 +1,51 @@
-// Local Development SQLite Schema
+// Neon PostgreSQL & Vercel Production Schema
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  RAZORPAY
+  COD
+  BANK_TRANSFER
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
 }
 
 model User {
@@ -14,7 +54,7 @@ model User {
   passwordHash String
   name         String
   phone        String?
-  role         String     @default("CUSTOMER") // SUPER_ADMIN, ADMIN, STAFF, CUSTOMER
+  role         Role       @default(CUSTOMER)
   isActive     Boolean    @default(true)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -52,7 +92,7 @@ model Category {
   id          String    @id @default(cuid())
   name        String
   slug        String    @unique
-  description String?
+  description String?   @db.Text
   image       String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -67,7 +107,7 @@ model Collection {
   name        String
   slug        String    @unique
   tagline     String?
-  description String?
+  description String?   @db.Text
   bannerImage String?
   isFeatured  Boolean   @default(false)
   createdAt   DateTime  @default(now())
@@ -83,8 +123,8 @@ model Product {
   title              String
   slug               String         @unique
   sku                String         @unique
-  shortDescription   String?
-  description        String
+  shortDescription   String?        @db.Text
+  description        String         @db.Text
   movement           String?
   caseSize           String?
   caseMaterial       String?
@@ -93,15 +133,15 @@ model Product {
   strapMaterial      String?
   glassType          String?        @default("Scratch-resistant Sapphire Crystal with AR Coating")
   powerReserve       String?
-  price              Decimal
-  compareAtPrice     Decimal?
-  costPrice          Decimal?
+  price              Decimal        @db.Decimal(10, 2)
+  compareAtPrice     Decimal?       @db.Decimal(10, 2)
+  costPrice          Decimal?       @db.Decimal(10, 2)
   stock              Int            @default(0)
   lowStockThreshold  Int            @default(3)
   isFeatured         Boolean        @default(false)
   isNew              Boolean        @default(true)
-  status             String         @default("PUBLISHED") // DRAFT, PUBLISHED, ARCHIVED
-  specifications     String?
+  status             ProductStatus  @default(PUBLISHED)
+  specifications     String?        @db.Text
   categoryId         String?
   collectionId       String?
   createdAt          DateTime       @default(now())
@@ -120,6 +160,8 @@ model Product {
   @@index([status])
   @@index([categoryId])
   @@index([collectionId])
+  @@index([price])
+  @@index([isFeatured])
 }
 
 model ProductImage {
@@ -144,22 +186,22 @@ model Order {
   guestEmail       String?
   guestPhone       String?
   guestName        String?
-  status           String        @default("PENDING") // PENDING, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED
-  paymentStatus    String        @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
-  paymentMethod    String        @default("RAZORPAY") // RAZORPAY, COD, BANK_TRANSFER
+  status           OrderStatus   @default(PENDING)
+  paymentStatus    PaymentStatus @default(PENDING)
+  paymentMethod    PaymentMethod @default(RAZORPAY)
   razorpayOrderId  String?       @unique
   razorpayPaymentId String?
-  subtotal         Decimal
-  taxAmount        Decimal       @default(0.00)
-  shippingAmount   Decimal       @default(0.00)
-  discountAmount   Decimal       @default(0.00)
-  totalAmount      Decimal
+  subtotal         Decimal       @db.Decimal(10, 2)
+  taxAmount        Decimal       @default(0.00) @db.Decimal(10, 2)
+  shippingAmount   Decimal       @default(0.00) @db.Decimal(10, 2)
+  discountAmount   Decimal       @default(0.00) @db.Decimal(10, 2)
+  totalAmount      Decimal       @db.Decimal(10, 2)
   couponCode       String?
-  shippingAddress  String
-  billingAddress   String?
+  shippingAddress  String        @db.Text
+  billingAddress   String?       @db.Text
   trackingNumber   String?
   courierName      String?
-  notes            String?
+  notes            String?       @db.Text
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
@@ -182,9 +224,9 @@ model OrderItem {
   title       String
   sku         String
   image       String?
-  price       Decimal
+  price       Decimal  @db.Decimal(10, 2)
   quantity    Int
-  total       Decimal
+  total       Decimal  @db.Decimal(10, 2)
   createdAt   DateTime @default(now())
 
   order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -200,10 +242,10 @@ model Payment {
   razorpayOrderId   String
   razorpayPaymentId String?       @unique
   razorpaySignature String?
-  amount            Decimal
+  amount            Decimal       @db.Decimal(10, 2)
   currency          String        @default("INR")
-  status            String        @default("PENDING")
-  rawResponse       String?
+  status            PaymentStatus @default(PENDING)
+  rawResponse       String?       @db.Text
   createdAt         DateTime      @default(now())
 
   order             Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -232,10 +274,10 @@ model InventoryLog {
 model Coupon {
   id             String       @id @default(cuid())
   code           String       @unique
-  discountType   String       @default("PERCENTAGE") // PERCENTAGE, FIXED
-  discountValue  Decimal
-  minOrderAmount Decimal?
-  maxDiscount    Decimal?
+  discountType   DiscountType @default(PERCENTAGE)
+  discountValue  Decimal      @db.Decimal(10, 2)
+  minOrderAmount Decimal?     @db.Decimal(10, 2)
+  maxDiscount    Decimal?     @db.Decimal(10, 2)
   validFrom      DateTime     @default(now())
   validTo        DateTime?
   usageLimit     Int?
@@ -255,7 +297,7 @@ model Review {
   authorName         String
   rating             Int      @default(5)
   title              String?
-  comment            String
+  comment            String   @db.Text
   isApproved         Boolean  @default(true)
   isVerifiedPurchase Boolean  @default(false)
   createdAt          DateTime @default(now())
@@ -286,8 +328,8 @@ model JournalPost {
   id          String   @id @default(cuid())
   title       String
   slug        String   @unique
-  excerpt     String
-  content     String
+  excerpt     String   @db.Text
+  content     String   @db.Text
   coverImage  String
   author      String   @default("REXTON Editorial")
   readTime    String   @default("4 min read")
@@ -303,7 +345,7 @@ model JournalPost {
 model Setting {
   id          String   @id @default(cuid())
   key         String   @unique
-  value       String
+  value       String   @db.Text
   description String?
   updatedAt   DateTime @updatedAt
 
