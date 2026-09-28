@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingBag, Eye, Heart } from 'lucide-react';
+import { ShoppingBag, Heart, Check } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/lib/cart-context';
 
@@ -21,6 +21,7 @@ export interface ProductCardProps {
     isFeatured?: boolean;
     stock: number;
     category?: { name: string; slug: string } | null;
+    collection?: { name: string; slug: string } | null;
     images: Array<{ url: string; altText?: string | null; isPrimary?: boolean }>;
   };
 }
@@ -29,16 +30,25 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [addedAnimation, setAddedAnimation] = useState(false);
+
+  // Validate images: ensure it starts with /images or https:// and NEVER contains makeup/coffee/broken URLs
+  const filterValidImage = (url?: string | null) => {
+    if (!url) return null;
+    if (url.includes('1522335789203') || url.includes('1509042239860') || url.includes('1547996160')) {
+      return null;
+    }
+    return url;
+  };
 
   const primaryImage =
-    product.images?.find((img) => img.isPrimary)?.url ||
-    product.images?.[0]?.url ||
-    'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80';
+    filterValidImage(product.images?.find((img) => img.isPrimary)?.url) ||
+    filterValidImage(product.images?.[0]?.url) ||
+    '/images/rexton-placeholder.svg';
 
   const secondaryImage =
-    product.images?.length > 1
-      ? product.images[1]?.url
-      : primaryImage;
+    filterValidImage(product.images?.length > 1 ? product.images[1]?.url : null) ||
+    primaryImage;
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,6 +66,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       },
       1
     );
+
+    setAddedAnimation(true);
+    setTimeout(() => setAddedAnimation(false), 1800);
   };
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -66,25 +79,25 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div
-      className="group flex flex-col bg-white border border-[#EAEAEA] hover:border-[#C5A880] transition-all duration-300 relative"
+      className="group flex flex-col bg-white border border-[#EDEDED] hover:border-[#C5A880] transition-colors duration-300 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Badges */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col space-y-1">
+      {/* Top Badges */}
+      <div className="absolute top-3.5 left-3.5 z-10 flex flex-wrap gap-1.5 items-center pointer-events-none">
         {product.isNew && (
-          <span className="bg-black text-[#C5A880] text-[9px] uppercase tracking-[0.2em] font-semibold px-2 py-1">
+          <span className="bg-black text-[#C5A880] text-[9px] uppercase tracking-[0.22em] font-semibold px-2 py-1">
             New
           </span>
         )}
         {product.isFeatured && (
-          <span className="bg-[#C5A880] text-black text-[9px] uppercase tracking-[0.2em] font-semibold px-2 py-1">
-            Masterpiece
+          <span className="bg-[#C5A880] text-black text-[9px] uppercase tracking-[0.22em] font-semibold px-2 py-1">
+            Signature
           </span>
         )}
         {product.stock <= 3 && product.stock > 0 && (
-          <span className="bg-amber-800 text-white text-[9px] uppercase tracking-[0.15em] font-semibold px-2 py-1">
-            Only {product.stock} Left
+          <span className="bg-[#2A2A2A] text-white text-[9px] uppercase tracking-[0.15em] font-medium px-2 py-1">
+            {product.stock} Left
           </span>
         )}
       </div>
@@ -92,59 +105,73 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Wishlist Button */}
       <button
         onClick={handleWishlistToggle}
-        className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm text-neutral-600 hover:text-red-600 transition-colors shadow-sm"
+        className="absolute top-3.5 right-3.5 z-10 p-2 bg-white/90 backdrop-blur-sm text-neutral-400 hover:text-red-600 transition-colors shadow-sm"
         aria-label="Save to Wishlist"
       >
-        <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-600 text-red-600' : ''}`} />
+        <Heart className={`w-4 h-4 transition-transform group-hover:scale-105 ${isWishlisted ? 'fill-red-600 text-red-600' : ''}`} />
       </button>
 
-      {/* Image Container */}
-      <Link href={`/product/${product.slug}`} className="relative h-72 w-full bg-[#FBFBFA] overflow-hidden block">
+      {/* Large Image Container - Watch Visually Dominates the Card */}
+      <Link
+        href={`/product/${product.slug}`}
+        className="relative h-80 sm:h-96 w-full bg-[#FAFAFA] overflow-hidden flex items-center justify-center p-6"
+      >
         <Image
           src={isHovered && secondaryImage !== primaryImage ? secondaryImage : primaryImage}
           alt={product.title}
           fill
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-contain object-center p-4 transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
-        {/* Overlay Quick Add Action on Desktop */}
-        <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        {/* Quick Add Overlay on Hover */}
+        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <button
             onClick={handleQuickAdd}
             disabled={product.stock <= 0}
-            className="w-full py-2.5 bg-white text-black text-[11px] uppercase tracking-[0.2em] font-semibold hover:bg-[#C5A880] hover:text-white transition-colors flex items-center justify-center space-x-2 disabled:bg-neutral-300 disabled:cursor-not-allowed"
+            className="w-full py-3 bg-white text-black text-[11px] uppercase tracking-[0.25em] font-semibold hover:bg-[#C5A880] hover:text-white transition-colors flex items-center justify-center space-x-2 shadow-lg disabled:bg-neutral-300 disabled:cursor-not-allowed"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>{product.stock > 0 ? 'Quick Acquisition' : 'Sold Out'}</span>
+            {addedAnimation ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Added to Bag</span>
+              </>
+            ) : (
+              <>
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>{product.stock > 0 ? 'Add to Bag' : 'Sold Out'}</span>
+              </>
+            )}
           </button>
         </div>
       </Link>
 
-      {/* Product Information */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
-        <div>
-          {product.category && (
-            <span className="text-[10px] uppercase tracking-[0.2em] text-[#C5A880] font-semibold block mb-1">
-              {product.category.name}
-            </span>
-          )}
+      {/* Product Details Section */}
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-3 bg-white">
+        <div className="space-y-1.5">
+          {/* Collection / Category Header */}
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
+            <span>{product.collection?.name || product.category?.name || 'Swiss Line'}</span>
+            <span className="text-neutral-400 font-normal">Ref: {product.sku}</span>
+          </div>
 
-          <Link href={`/product/${product.slug}`} className="block">
-            <h3 className="text-sm font-serif font-medium uppercase tracking-wider text-black group-hover:text-[#C5A880] transition-colors line-clamp-1">
+          {/* Full Product Name without Truncation */}
+          <Link href={`/product/${product.slug}`} className="block group/title">
+            <h3 className="text-[15px] font-serif font-medium tracking-wide text-black group-hover/title:text-[#C5A880] transition-colors leading-snug">
               {product.title}
             </h3>
           </Link>
 
-          <p className="text-[11px] text-neutral-400 mt-1 line-clamp-1">
-            {product.movement || 'Swiss Mechanical Calibre'} {product.caseSize ? `• ${product.caseSize}` : ''}
+          {/* Technical Specifications preview */}
+          <p className="text-[12px] text-neutral-500 font-light leading-normal">
+            {product.movement || 'Mechanical Calibre'} {product.caseSize ? `• ${product.caseSize}` : ''}
           </p>
         </div>
 
-        {/* Pricing */}
-        <div className="pt-2 border-t border-neutral-100 flex items-baseline justify-between">
-          <div className="flex items-baseline space-x-2">
-            <span className="text-sm font-semibold text-black">
+        {/* Price & Availability Bar */}
+        <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+          <div className="flex items-baseline space-x-2.5">
+            <span className="text-[15px] font-semibold text-black tracking-tight">
               {formatPrice(product.price)}
             </span>
             {product.compareAtPrice && Number(product.compareAtPrice) > Number(product.price) && (
@@ -153,8 +180,9 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
           </div>
-          <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-medium">
-            Ref: {product.sku}
+
+          <span className="text-[10px] tracking-wider uppercase font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 border border-emerald-200">
+            {product.stock > 0 ? 'Available' : 'Order on Request'}
           </span>
         </div>
       </div>

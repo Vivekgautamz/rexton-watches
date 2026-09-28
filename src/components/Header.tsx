@@ -46,21 +46,24 @@ export default function Header() {
           </div>
 
           {/* Left Navigation (Desktop) */}
-          <nav className="hidden lg:flex items-center space-x-8 text-[13px] tracking-widest uppercase font-medium text-neutral-800">
+          <nav className="hidden lg:flex items-center space-x-7 text-[12px] tracking-[0.2em] uppercase font-medium text-neutral-800">
+            <Link href="/" className="hover:text-[#C5A880] transition-colors">
+              Home
+            </Link>
             <Link href="/shop" className="hover:text-[#C5A880] transition-colors">
-              Timepieces
+              Watches
             </Link>
             <Link href="/collections" className="hover:text-[#C5A880] transition-colors">
               Collections
             </Link>
-            <Link href="/shop?category=chronographs" className="hover:text-[#C5A880] transition-colors">
-              Chronographs
+            <Link href="/about" className="hover:text-[#C5A880] transition-colors">
+              About
             </Link>
             <Link href="/journal" className="hover:text-[#C5A880] transition-colors">
               Journal
             </Link>
-            <Link href="/about" className="hover:text-[#C5A880] transition-colors">
-              Atelier
+            <Link href="/contact" className="hover:text-[#C5A880] transition-colors">
+              Contact
             </Link>
           </nav>
 

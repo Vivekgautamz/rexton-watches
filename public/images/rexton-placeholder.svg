@@ -1,0 +1,24 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#141414"/>
+  <circle cx="400" cy="400" r="260" stroke="#262626" stroke-width="1.5"/>
+  <circle cx="400" cy="400" r="230" stroke="#C5A880" stroke-width="1" stroke-dasharray="4 6" opacity="0.4"/>
+  <circle cx="400" cy="400" r="180" stroke="#222222" stroke-width="1"/>
+  
+  <!-- Subtle dial markers -->
+  <line x1="400" y1="175" x2="400" y2="195" stroke="#C5A880" stroke-width="2"/>
+  <line x1="400" y1="605" x2="400" y2="625" stroke="#C5A880" stroke-width="2"/>
+  <line x1="175" y1="400" x2="195" y2="400" stroke="#C5A880" stroke-width="2"/>
+  <line x1="605" y1="400" x2="625" y2="400" stroke="#C5A880" stroke-width="2"/>
+
+  <!-- Hands -->
+  <line x1="400" y1="400" x2="400" y2="270" stroke="#C5A880" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="400" y1="400" x2="490" y2="400" stroke="#E5E5E5" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="400" cy="400" r="6" fill="#C5A880"/>
+
+  <!-- Brand Typography -->
+  <text x="400" y="340" text-anchor="middle" fill="#FFFFFF" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="22" letter-spacing="0.35em" font-weight="500">REXTON</text>
+  <text x="400" y="365" text-anchor="middle" fill="#C5A880" font-family="'Inter', sans-serif" font-size="9" letter-spacing="0.3em" font-weight="600">SWISS TIMELESS ROOT</text>
+  
+  <rect x="300" y="470" width="200" height="28" fill="#1C1C1C" stroke="#2E2E2E" stroke-width="1"/>
+  <text x="400" y="488" text-anchor="middle" fill="#888888" font-family="'Inter', sans-serif" font-size="10" letter-spacing="0.2em">PRODUCT IMAGE ARCHIVE</text>
+</svg>

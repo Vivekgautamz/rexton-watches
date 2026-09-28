@@ -17,7 +17,19 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const activeImage = images[selectedIdx]?.url || 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=85';
+  // Filter out any invalid makeup/coffee URLs
+  const validImages = images.filter(
+    (img) =>
+      img?.url &&
+      !img.url.includes('1522335789203') &&
+      !img.url.includes('1509042239860') &&
+      !img.url.includes('1547996160')
+  );
+
+  const activeImage =
+    validImages[selectedIdx]?.url ||
+    validImages[0]?.url ||
+    '/images/rexton-placeholder.svg';
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -29,13 +41,13 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4">
       {/* Thumbnail Selector Column */}
-      {images.length > 1 && (
+      {validImages.length > 1 && (
         <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto max-h-[550px] scrollbar-none">
-          {images.map((img, idx) => (
+          {validImages.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedIdx(idx)}
-              className={`relative w-20 h-20 flex-shrink-0 bg-neutral-50 border transition-all ${
+              className={`relative w-20 h-20 flex-shrink-0 bg-[#F9F9F8] border transition-all p-1.5 ${
                 selectedIdx === idx
                   ? 'border-black ring-1 ring-black'
                   : 'border-neutral-200 hover:border-neutral-400'
@@ -45,7 +57,7 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
                 src={img.url}
                 alt={`${title} thumbnail ${idx + 1}`}
                 fill
-                className="object-cover"
+                className="object-contain p-1"
                 sizes="80px"
               />
             </button>
@@ -55,7 +67,7 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
 
       {/* Primary Zoomable Main Viewport */}
       <div
-        className="relative flex-1 h-[450px] sm:h-[550px] bg-[#FAF9F6] border border-neutral-200 overflow-hidden cursor-crosshair"
+        className="relative flex-1 h-[450px] sm:h-[580px] bg-[#FAF9F7] border border-neutral-200 overflow-hidden cursor-crosshair flex items-center justify-center p-8"
         onMouseEnter={() => setIsZoomed(true)}
         onMouseLeave={() => setIsZoomed(false)}
         onMouseMove={handleMouseMove}
@@ -65,8 +77,8 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
           alt={title}
           fill
           priority
-          className={`object-cover object-center transition-transform duration-200 ${
-            isZoomed ? 'scale-150' : 'scale-100'
+          className={`object-contain p-6 transition-transform duration-200 ${
+            isZoomed ? 'scale-175' : 'scale-100'
           }`}
           style={
             isZoomed
@@ -79,8 +91,8 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
         />
 
         {!isZoomed && (
-          <div className="absolute bottom-4 right-4 bg-black/70 text-white text-[10px] tracking-wider uppercase px-2.5 py-1 backdrop-blur-sm pointer-events-none">
-            Hover to Magnify
+          <div className="absolute bottom-4 right-4 bg-black/80 text-white text-[10px] tracking-widest uppercase px-3 py-1 backdrop-blur-sm pointer-events-none">
+            Hover to Inspect Calibre
           </div>
         )}
       </div>

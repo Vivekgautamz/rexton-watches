@@ -80,15 +80,15 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       {/* Header Banner */}
       <div className="bg-[#0C0C0C] text-white py-16 px-4 border-b border-[#222222]">
         <div className="max-w-7xl mx-auto text-center space-y-3">
-          <span className="text-[11px] tracking-[0.3em] uppercase text-[#C5A880] font-semibold">
-            Swiss Haute Horlogerie
+          <span className="text-[11px] tracking-[0.35em] uppercase text-[#C5A880] font-semibold">
+            REXTON &bull; SWISS TIMELESS ROOT
           </span>
-          <h1 className="text-3xl sm:text-4xl font-serif tracking-[0.2em] uppercase font-normal text-white">
-            The REXTON Timepiece Collection
+          <h1 className="text-3xl sm:text-5xl font-serif tracking-[0.2em] uppercase font-normal text-white">
+            Watches
           </h1>
           <div className="w-12 h-0.5 bg-[#C5A880] mx-auto" />
-          <p className="text-xs text-neutral-400 max-w-xl mx-auto font-light leading-relaxed pt-2">
-            Every timepiece is assembled and hand-finished in our Swiss ateliers, accompanied by a 5-Year International Movement Warranty.
+          <p className="text-xs sm:text-sm text-neutral-300 max-w-xl mx-auto font-light leading-relaxed pt-2">
+            Explore the REXTON collection of precision mechanical instruments, chronographs, and haute horlogerie calibres.
           </p>
         </div>
       </div>
