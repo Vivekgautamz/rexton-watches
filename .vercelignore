@@ -1,0 +1,4 @@
+public/videos/
+scripts/
+.env*
+*.md

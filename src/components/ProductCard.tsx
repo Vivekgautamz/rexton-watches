@@ -120,6 +120,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           src={isHovered && secondaryImage !== primaryImage ? secondaryImage : primaryImage}
           alt={product.title}
           fill
+          unoptimized
           className="object-contain object-center p-4 transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('⏳ Starting REXTON Watch Store database seed...');
+  console.log('⏳ Starting REXTON Watch Store database seed with real user watch photos...');
 
   // 1. Seed Super Admin and Staff Users
   const superAdminPassword = await bcrypt.hash('Admin@Rexton2026!', 12);
@@ -55,31 +55,31 @@ async function main() {
       name: 'Chronographs',
       slug: 'chronographs',
       description: 'Precision timing instruments engineered with Swiss mechanical column-wheel movements and dual sub-dials.',
-      image: '/images/products/watch-sovereign-blue-chrono.jpg',
+      image: '/images/watches/IMG20260906163102.jpg',
     },
     {
       name: 'Automatic Masterpieces',
       slug: 'automatic',
       description: 'Self-winding horological excellence powered by the natural kinetics of the wearer.',
-      image: '/images/products/watch-octagon-skeleton-front.jpg',
+      image: '/images/watches/IMG20260906164112.jpg',
     },
     {
       name: 'Heritage Dress Watches',
       slug: 'dress-watches',
       description: 'Ultra-slim silhouettes with guilloché dials and hand-finished straps.',
-      image: '/images/products/watch-barrel-chrono-front.jpg',
+      image: '/images/watches/IMG20260906165658.jpg',
     },
     {
       name: 'Nautical & Diver Editions',
       slug: 'diver-editions',
       description: 'Deep-sea certified up to 300 meters, featuring helium escape valves and Super-LumiNova luminescence.',
-      image: '/images/hero/rexton-hero-banner.jpg',
+      image: '/images/watches/IMG20260906165541.jpg',
     },
     {
       name: 'Haute Horlogerie & Tourbillons',
       slug: 'tourbillon',
       description: 'Gravity-defying flying tourbillon cages crafted in 18k Rose Gold and Grade 5 Titanium.',
-      image: '/images/products/watch-tencel-rosegold-1.jpg',
+      image: '/images/watches/IMG20260906165738.jpg',
     },
   ];
 
@@ -110,7 +110,7 @@ async function main() {
       slug: 'apex-aero',
       tagline: 'High-Performance Precision Horology',
       description: 'Constructed from lightweight forged carbon and satin-brushed 316L stainless steel for extreme performance.',
-      bannerImage: '/images/hero/rexton-hero-banner.jpg',
+      bannerImage: '/images/watches/IMG20260906163102.jpg',
       isFeatured: true,
     },
     {
@@ -118,7 +118,7 @@ async function main() {
       slug: 'abyssal-deep',
       tagline: 'Sublime Resilience in the Deep Ocean',
       description: 'Uncompromising aquatic instruments tested under severe atmospheric pressure with ceramic rotating bezels.',
-      bannerImage: '/images/products/watch-octagon-skeleton-front.jpg',
+      bannerImage: '/images/watches/IMG20260906165541.jpg',
       isFeatured: true,
     },
   ];
@@ -135,14 +135,14 @@ async function main() {
 
   console.log(`✅ ${collections.length} Collections seeded.`);
 
-  // 4. Seed Luxury Timepieces - ONLY REAL WATCH IMAGES
+  // 4. Seed 10 Luxury Timepieces using user's real photos
   const productsData = [
     {
       title: 'REXTON Sovereign Chronograph 42mm',
       slug: 'rexton-sovereign-chronograph-42mm',
       sku: 'REX-SOV-4201',
       shortDescription: 'Swiss automatic column-wheel chronograph with sunburst midnight blue dial and sapphire crystal caseback.',
-      description: 'The REXTON Sovereign Chronograph embodies the golden era of Swiss horology. Powered by an automatic movement with a 70-hour power reserve, this masterpiece showcases hand-finished Geneva stripes (Côtes de Genève) visible through the exhibition sapphire caseback. The sunburst midnight blue dial is complemented by faceted rhodium-plated hands and double anti-reflective sapphire crystal.',
+      description: 'The REXTON Sovereign Chronograph embodies the golden era of Swiss horology. Powered by an automatic movement with a 70-hour power reserve, this masterpiece showcases hand-finished Geneva stripes visible through the exhibition sapphire caseback. The sunburst midnight blue dial is complemented by faceted rhodium-plated hands and double anti-reflective sapphire crystal.',
       movement: 'Swiss Automatic Calibre R-902 (28,800 vph)',
       caseSize: '42mm',
       caseMaterial: '316L Surgical Grade Stainless Steel',
@@ -179,6 +179,24 @@ async function main() {
           isPrimary: true,
           sortOrder: 0,
         },
+        {
+          url: '/images/watches/IMG20260906164723.jpg',
+          altText: 'REXTON Sovereign Chronograph Dial Macro Detail',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906164724.jpg',
+          altText: 'REXTON Sovereign Chronograph Case Angle',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906164840.jpg',
+          altText: 'REXTON Sovereign Chronograph on Wrist',
+          isPrimary: false,
+          sortOrder: 3,
+        },
       ],
     },
     {
@@ -186,7 +204,7 @@ async function main() {
       slug: 'rexton-barrel-skeleton-chronograph-46mm',
       sku: 'REX-BRL-4607',
       shortDescription: 'Tonneau-shaped skeleton chronograph with gold-accent sub-dials and black vulcanized rubber strap.',
-      description: 'The Barrel Skeleton Chronograph commands attention with its dramatic tonneau case architecture and open-worked skeleton dial revealing every gear and wheel of the high-beat movement. Gold-accented subdials at 3 and 9 o\'clock track elapsed minutes and seconds with precision. Matching silver case screws anchor the bold design aesthetic. Paired with a ribbed black vulcanized rubber strap for sport-luxury versatility.',
+      description: 'The Barrel Skeleton Chronograph commands attention with its dramatic tonneau case architecture and open-worked skeleton dial revealing every gear and wheel of the movement. Gold-accented subdials at 3 and 9 o\'clock track elapsed minutes and seconds with precision. Matching silver case screws anchor the bold design aesthetic. Paired with a ribbed black vulcanized rubber strap for sport-luxury versatility.',
       movement: 'Automatic Skeleton Chronograph Calibre R-460',
       caseSize: '46mm',
       caseMaterial: 'Silver 316L Stainless Steel — Tonneau Case',
@@ -216,10 +234,28 @@ async function main() {
       }),
       images: [
         {
-          url: '/images/products/watch-barrel-chrono-front.jpg',
+          url: '/images/watches/IMG20260906163102.jpg',
           altText: 'REXTON Barrel Skeleton Chronograph 46mm Front View',
           isPrimary: true,
           sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906163104.jpg',
+          altText: 'REXTON Barrel Skeleton Chronograph Profile Angle',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906163111.jpg',
+          altText: 'REXTON Barrel Skeleton Chronograph Dial Detail',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906163237.jpg',
+          altText: 'REXTON Barrel Skeleton Chronograph on Wrist',
+          isPrimary: false,
+          sortOrder: 3,
         },
       ],
     },
@@ -258,10 +294,34 @@ async function main() {
       }),
       images: [
         {
-          url: '/images/products/watch-octagon-skeleton-front.jpg',
+          url: '/images/watches/IMG20260906164112.jpg',
           altText: 'REXTON Octagon Skeleton Automatic 44mm Front View',
           isPrimary: true,
           sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906164113.jpg',
+          altText: 'REXTON Octagon Skeleton Automatic Bevel View',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906164155.jpg',
+          altText: 'REXTON Octagon Skeleton Movement Macro',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906164203.jpg',
+          altText: 'REXTON Octagon Skeleton Caseback View',
+          isPrimary: false,
+          sortOrder: 3,
+        },
+        {
+          url: '/images/watches/IMG20260906164238.jpg',
+          altText: 'REXTON Octagon Skeleton on Wrist',
+          isPrimary: false,
+          sortOrder: 4,
         },
       ],
     },
@@ -299,10 +359,22 @@ async function main() {
       }),
       images: [
         {
-          url: '/images/products/watch-ladies-blue-dial.jpg',
+          url: '/images/watches/IMG20260906164003.jpg',
           altText: 'REXTON Diamant Ladies Bracelet Azure Blue Dial',
           isPrimary: true,
           sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906164011.jpg',
+          altText: 'REXTON Diamant Ladies Bracelet Clasp & Link Detail',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906164016.jpg',
+          altText: 'REXTON Diamant Ladies Bracelet Profile Angle',
+          isPrimary: false,
+          sortOrder: 2,
         },
       ],
     },
@@ -340,16 +412,28 @@ async function main() {
       }),
       images: [
         {
-          url: '/images/products/watch-tencel-rosegold-1.jpg',
+          url: '/images/watches/IMG20260906165033.jpg',
           altText: 'REXTON Rotor Sport Rose Gold Spinning Wheel Front',
           isPrimary: true,
           sortOrder: 0,
         },
         {
-          url: '/images/products/watch-tencel-rosegold-2.jpg',
-          altText: 'REXTON Rotor Sport Rose Gold Dial Close-up',
+          url: '/images/watches/IMG20260906165034.jpg',
+          altText: 'REXTON Rotor Sport Rose Gold Dial Detail',
           isPrimary: false,
           sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165058.jpg',
+          altText: 'REXTON Rotor Sport Rose Gold Bracelet Angle',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906165059.jpg',
+          altText: 'REXTON Rotor Sport Rose Gold Caliper Close-up',
+          isPrimary: false,
+          sortOrder: 3,
         },
       ],
     },
@@ -387,10 +471,253 @@ async function main() {
       }),
       images: [
         {
-          url: '/images/hero/rexton-hero-banner.jpg',
-          altText: 'REXTON Apex Carbon Chronograph Macro Studio View',
+          url: '/images/watches/IMG20260906165400.jpg',
+          altText: 'REXTON Apex Carbon Chronograph Front View',
           isPrimary: true,
           sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906165401.jpg',
+          altText: 'REXTON Apex Carbon Chronograph Bevel View',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165431.jpg',
+          altText: 'REXTON Apex Carbon Chronograph Dial Detail',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906165432.jpg',
+          altText: 'REXTON Apex Carbon Chronograph Crown & Pushers',
+          isPrimary: false,
+          sortOrder: 3,
+        },
+        {
+          url: '/images/watches/IMG20260906165502.jpg',
+          altText: 'REXTON Apex Carbon Chronograph on Wrist',
+          isPrimary: false,
+          sortOrder: 4,
+        },
+      ],
+    },
+    {
+      title: 'REXTON Chrono Sport Monopoussoir',
+      slug: 'rexton-chrono-sport-monopoussoir',
+      sku: 'REX-MONO-4106',
+      shortDescription: 'Single-pusher column-wheel chronograph with vintage aesthetic and tachymeter bezel scale.',
+      description: 'A tribute to 1930s aviators. This mono-pusher chronograph integrates the start, stop, and reset functions into a single coaxial crown pusher. The balanced dial features twin registers and a telemetric outer chapter ring.',
+      movement: 'Integrated Column-Wheel Monopusher Chronograph Calibre R-550',
+      caseSize: '41mm',
+      caseMaterial: '316L Stainless Steel',
+      waterResistance: '10 ATM (100m)',
+      dialColor: 'Anthracite Sunburst with Silver Registers',
+      strapMaterial: 'Hand-finished Calfskin with Quick-release',
+      glassType: 'Box Sapphire Crystal with Dual AR',
+      powerReserve: '60 Hours',
+      price: 175000,
+      compareAtPrice: 195000,
+      stock: 8,
+      lowStockThreshold: 2,
+      isFeatured: false,
+      isNew: true,
+      categoryId: categories[0].id,
+      collectionId: collections[1].id,
+      specifications: JSON.stringify({
+        'Movement': 'Monopusher Chronograph Calibre R-550',
+        'Case Diameter': '41mm',
+        'Case Thickness': '12.8mm',
+        'Power Reserve': '60 Hours',
+        'Water Resistance': '10 ATM (100m)',
+        'Warranty': '5-Year Atelier Warranty',
+      }),
+      images: [
+        {
+          url: '/images/watches/IMG20260906165143.jpg',
+          altText: 'REXTON Chrono Sport Monopoussoir Front Dial',
+          isPrimary: true,
+          sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906165145.jpg',
+          altText: 'REXTON Chrono Sport Monopoussoir Side Angle',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165210.jpg',
+          altText: 'REXTON Chrono Sport Monopoussoir Dial Close-up',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+      ],
+    },
+    {
+      title: 'REXTON Abyssal Deep Diver 300M Ceramic',
+      slug: 'rexton-abyssal-deep-diver-300m',
+      sku: 'REX-ABY-4204',
+      shortDescription: 'Professional 300M dive instrument with unidirectional ceramic bezel and Helium Escape Valve.',
+      description: 'Engineered for extreme oceanic exploration. The Abyssal Deep is pressure-tested in Switzerland to withstand 30 atmospheres of pressure. Its scratch-proof zirconium oxide ceramic bezel ensures tactical timing, while indices coated in Super-LumiNova guarantee unmatched legibility in total darkness.',
+      movement: 'High-Torque Automatic Calibre R-770 Shock-Resistant',
+      caseSize: '42.5mm',
+      caseMaterial: 'Satin-brushed 316L Stainless Steel & Ceramic Bezel',
+      waterResistance: '30 ATM (300m / 1000ft)',
+      dialColor: 'Deep Ocean Matte Black',
+      strapMaterial: 'Solid Link Steel Bracelet with Wet-suit Extension',
+      glassType: '4mm Thick Double-domed Sapphire Crystal',
+      powerReserve: '55 Hours',
+      price: 165000,
+      compareAtPrice: 195000,
+      stock: 9,
+      lowStockThreshold: 3,
+      isFeatured: true,
+      isNew: true,
+      categoryId: categories[3].id,
+      collectionId: collections[2].id,
+      specifications: JSON.stringify({
+        'Movement': 'High-Torque Automatic Shock-Resistant',
+        'Case Diameter': '42.5mm',
+        'Case Thickness': '13.8mm',
+        'Bezel': '120-Click Unidirectional High-Tech Ceramic',
+        'Water Resistance': '30 ATM (300m / 1000ft)',
+        'Helium Valve': 'Automatic Escape Valve at 9 o\'clock',
+        'Warranty': '5-Year Atelier Warranty',
+      }),
+      images: [
+        {
+          url: '/images/watches/IMG20260906165541.jpg',
+          altText: 'REXTON Abyssal Deep Diver 300M Front View',
+          isPrimary: true,
+          sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906165542.jpg',
+          altText: 'REXTON Abyssal Deep Diver Dial & Ceramic Bezel',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165549.jpg',
+          altText: 'REXTON Abyssal Deep Diver Profile',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906165550.jpg',
+          altText: 'REXTON Abyssal Deep Diver Caseback',
+          isPrimary: false,
+          sortOrder: 3,
+        },
+      ],
+    },
+    {
+      title: 'REXTON Heritage Automatic 39mm Silver Dial',
+      slug: 'rexton-heritage-automatic-39mm-silver',
+      sku: 'REX-HRT-3903',
+      shortDescription: 'Classic dress watch featuring a guilloché silver dial, thermal blued hands, and slim 8.9mm profile.',
+      description: 'An exercise in minimalist refinement. The Heritage 39mm represents the archetype of the gentleman’s dress watch. Featuring a hand-turned Clous de Paris guilloché center dial, flame-blued leaf hands, and an ultra-thin automatic movement that slips effortlessly under a cuff.',
+      movement: 'Ultra-thin Automatic Calibre R-280 (8.9mm case height)',
+      caseSize: '39mm',
+      caseMaterial: '316L Stainless Steel with Mirror Polishing',
+      waterResistance: '5 ATM (50m / 165ft)',
+      dialColor: 'Guilloché Opaline Silver',
+      strapMaterial: 'French Calfskin in Saddle Tan',
+      glassType: 'Curved Sapphire Crystal',
+      powerReserve: '48 Hours',
+      price: 135000,
+      compareAtPrice: 155000,
+      stock: 15,
+      lowStockThreshold: 4,
+      isFeatured: true,
+      isNew: false,
+      categoryId: categories[2].id,
+      collectionId: collections[0].id,
+      specifications: JSON.stringify({
+        'Movement': 'Ultra-thin Automatic Calibre R-280',
+        'Case Diameter': '39mm',
+        'Case Thickness': '8.9mm',
+        'Dial Pattern': 'Hand-guilloché Clous de Paris',
+        'Hands': 'Flame-blued Thermal Steel',
+        'Water Resistance': '5 ATM (50m)',
+        'Warranty': '5-Year Atelier Warranty',
+      }),
+      images: [
+        {
+          url: '/images/watches/IMG20260906165658.jpg',
+          altText: 'REXTON Heritage Automatic 39mm Silver Dial Front',
+          isPrimary: true,
+          sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906165703.jpg',
+          altText: 'REXTON Heritage Automatic Dial Macro Detail',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165732.jpg',
+          altText: 'REXTON Heritage Automatic Slim Profile',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+      ],
+    },
+    {
+      title: 'REXTON Tourbillon Imperial Rose Gold 41mm',
+      slug: 'rexton-tourbillon-imperial-rose-gold',
+      sku: 'REX-TRB-4105',
+      shortDescription: 'Flying 60-second Tourbillon crafted in 18k Rose Gold with grand feu enamel dial.',
+      description: 'The pinnacle of the REXTON atelier. The Imperial Tourbillon features a gravity-compensating one-minute flying tourbillon cage floating at the 6 o\'clock aperture. Cased in solid 18k Rose Gold with hand-beveled bridges, anglage finishing, and an authentic Grand Feu white enamel dial.',
+      movement: 'In-House Hand-Wound Flying Tourbillon Calibre RT-01',
+      caseSize: '41mm',
+      caseMaterial: '18k 4N Solid Rose Gold',
+      waterResistance: '3 ATM (30m / 100ft)',
+      dialColor: 'Grand Feu White Enamel',
+      strapMaterial: 'Hand-crafted Black Mississippi Alligator with 18k Gold Buckle',
+      glassType: 'Box-form Sapphire Crystal with Anti-glare treatment',
+      powerReserve: '100 Hours (Twin Barrels)',
+      price: 850000,
+      compareAtPrice: 950000,
+      stock: 3,
+      lowStockThreshold: 1,
+      isFeatured: true,
+      isNew: true,
+      categoryId: categories[4].id,
+      collectionId: collections[0].id,
+      specifications: JSON.stringify({
+        'Movement': 'Hand-Wound Flying Tourbillon RT-01',
+        'Case Diameter': '41mm',
+        'Case Material': '18k Solid Rose Gold',
+        'Power Reserve': '100 Hours (Twin Barrels)',
+        'Tourbillon Cage': '60-Second Flying Tourbillon (0.28g)',
+        'Water Resistance': '3 ATM (30m)',
+        'Warranty': '5-Year Atelier Warranty',
+      }),
+      images: [
+        {
+          url: '/images/watches/IMG20260906165738.jpg',
+          altText: 'REXTON Tourbillon Imperial Rose Gold Front',
+          isPrimary: true,
+          sortOrder: 0,
+        },
+        {
+          url: '/images/watches/IMG20260906165739.jpg',
+          altText: 'REXTON Tourbillon Imperial Rose Gold Dial Detail',
+          isPrimary: false,
+          sortOrder: 1,
+        },
+        {
+          url: '/images/watches/IMG20260906165909.jpg',
+          altText: 'REXTON Tourbillon Imperial Rose Gold Cage Close-up',
+          isPrimary: false,
+          sortOrder: 2,
+        },
+        {
+          url: '/images/watches/IMG20260906165911.jpg',
+          altText: 'REXTON Tourbillon Imperial Rose Gold Exhibition Caseback',
+          isPrimary: false,
+          sortOrder: 3,
         },
       ],
     },
@@ -411,7 +738,7 @@ async function main() {
       },
     });
 
-    // Seed images
+    // Seed all images for this product
     await prisma.productImage.deleteMany({ where: { productId: product.id } });
     for (const img of images) {
       await prisma.productImage.create({
@@ -432,33 +759,34 @@ async function main() {
         changeAmount: productFields.stock,
         previousStock: 0,
         newStock: productFields.stock,
-        reason: 'INITIAL_SEED',
+        reason: 'PHOTO_SEED',
       },
     });
 
     // Seed verified customer review
-    await prisma.review.create({
-      data: {
+    await prisma.review.upsert({
+      where: { id: `rev-${product.id}` },
+      update: {},
+      create: {
+        id: `rev-${product.id}`,
         productId: product.id,
         authorName: 'Julian Sterling',
         rating: 5,
-        title: 'Masterpiece of modern watchmaking',
-        comment: 'The finishing on the case and the smooth sweep of the chronograph hand rival timepieces twice the price. Exceptional craftsmanship and wrist presence.',
+        title: 'Exceptional craftsmanship and wrist presence',
+        comment: 'The finishing on the case and the smooth sweep of the movement rival timepieces twice the price. Pure mechanical perfection.',
         isApproved: true,
         isVerifiedPurchase: true,
       },
     });
   }
 
-  // Clean up any old unused products from previous demo seeds that had invalid images
-  const validSlugs = productsData.map((p) => p.slug);
+  // Remove any obsolete products that are not part of the active catalog
+  const activeSlugs = productsData.map((p) => p.slug);
   await prisma.product.deleteMany({
-    where: {
-      slug: { notIn: validSlugs },
-    },
+    where: { slug: { notIn: activeSlugs } },
   });
 
-  console.log(`✅ ${productsData.length} Real Timepieces seeded with 100% authentic images and reviews.`);
+  console.log(`✅ All ${productsData.length} Timepieces seeded with user's real watch photography galleries!`);
 
   // 5. Seed Coupons
   const couponsData = [
@@ -518,7 +846,7 @@ Here are the four pillars of timepiece preservation:
 2. Avoid setting the date complication between 9:00 PM and 3:00 AM when the calendar gearing is engaged.
 3. Keep the watch isolated from strong electromagnetic fields (speakers, MRI apparatus, inductive chargers).
 4. Entrust your watch only to authorized REXTON ateliers for pressure testing and synthetic ultrasonic cleaning.`,
-      coverImage: '/images/hero/rexton-hero-banner.jpg',
+      coverImage: '/images/watches/IMG20260906165400.jpg',
       author: 'REXTON Technical Atelier',
       readTime: '4 min read',
       isPublished: true,
@@ -534,7 +862,7 @@ Here are the four pillars of timepiece preservation:
   }
 
   console.log(`✅ ${journalPosts.length} Journal posts seeded.`);
-  console.log('🎉 REXTON Database seeding completed successfully with 100% authentic watch images!');
+  console.log('🎉 REXTON Database seeding completed with real watch photos from C:\\1Rexton\\product image\\watches!');
 }
 
 main()

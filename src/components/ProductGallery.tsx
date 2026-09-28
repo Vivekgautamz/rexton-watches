@@ -57,6 +57,7 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
                 src={img.url}
                 alt={`${title} thumbnail ${idx + 1}`}
                 fill
+                unoptimized
                 className="object-contain p-1"
                 sizes="80px"
               />
@@ -77,6 +78,7 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
           alt={title}
           fill
           priority
+          unoptimized
           className={`object-contain p-6 transition-transform duration-200 ${
             isZoomed ? 'scale-175' : 'scale-100'
           }`}

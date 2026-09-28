@@ -390,12 +390,12 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Wrist Profile 1: Barrel Skeleton */}
             <div className="bg-white border border-[#EAEAEA] p-6 space-y-4">
-              <div className="relative h-72 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
+              <div className="relative h-80 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
                 <Image
-                  src="/images/products/watch-barrel-chrono-front.jpg"
+                  src="/images/watches/IMG20260906163237.jpg"
                   alt="REXTON Barrel Skeleton Chronograph on the Wrist"
                   fill
-                  className="object-contain p-4 hover:scale-105 transition-transform duration-500"
+                  className="object-contain p-2 hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -414,12 +414,12 @@ export default async function HomePage() {
 
             {/* Wrist Profile 2: Octagon Skeleton */}
             <div className="bg-white border border-[#EAEAEA] p-6 space-y-4">
-              <div className="relative h-72 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
+              <div className="relative h-80 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
                 <Image
-                  src="/images/products/watch-octagon-skeleton-front.jpg"
+                  src="/images/watches/IMG20260906164238.jpg"
                   alt="REXTON Octagon Skeleton on the Wrist"
                   fill
-                  className="object-contain p-4 hover:scale-105 transition-transform duration-500"
+                  className="object-contain p-2 hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
@@ -436,26 +436,26 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Wrist Profile 3: Sovereign Chrono */}
+            {/* Wrist Profile 3: Apex Carbon Chrono */}
             <div className="bg-white border border-[#EAEAEA] p-6 space-y-4">
-              <div className="relative h-72 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
+              <div className="relative h-80 w-full bg-[#F4F4F2] overflow-hidden flex items-center justify-center">
                 <Image
-                  src="/images/products/watch-sovereign-blue-chrono.jpg"
-                  alt="REXTON Sovereign Chronograph on the Wrist"
+                  src="/images/watches/IMG20260906165502.jpg"
+                  alt="REXTON Apex Carbon Chronograph on the Wrist"
                   fill
-                  className="object-contain p-4 hover:scale-105 transition-transform duration-500"
+                  className="object-contain p-2 hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase tracking-widest text-[#C5A880] font-semibold block">
-                  Shown on a 16.5cm (6.5″) wrist
+                  Shown on a 17.2cm (6.8″) wrist
                 </span>
                 <h4 className="text-base font-serif uppercase tracking-wider text-black">
-                  Sovereign Chronograph 42mm
+                  Apex Carbon Chrono Black 43mm
                 </h4>
                 <p className="text-xs text-neutral-500 font-light leading-relaxed">
-                  Classic 42mm round silhouette with gentle downward-curved lugs. Slips cleanly under dress cuffs with immediate refined wrist impact.
+                  Monolithic forged carbon case weighing just 54 grams. Ultra-lightweight ergonomics engineered for active and automotive lifestyles.
                 </p>
               </div>
             </div>
